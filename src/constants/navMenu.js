@@ -15,8 +15,8 @@ const navMenu = [
   },
 
   {
-    label: "Product",
-    route: "/Product",
+    label: "Products",
+    route: "/Products",
   },
 
   {

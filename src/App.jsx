@@ -7,9 +7,10 @@ import {
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Gallery from "./pages/Gallery";
-import Product from "./pages/Product";
 import Contact from "./pages/Contact";
 import MainLayout from "./layouts/MainLayout";
+import ProductsLists from "./pages/products/Lists";
+import ProductDetails from "./pages/products/Details";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -18,8 +19,9 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="Gallery" element={<Gallery />} />
-        <Route path="Product" element={<Product />} />
         <Route path="Contact" element={<Contact />} />
+        <Route path="Products" element={<ProductsLists />} />
+        <Route path="Products/details" element={<ProductDetails />} />
       </Route>
     )
   );

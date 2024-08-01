@@ -1,19 +1,30 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import navMenu from "../constants/navMenu";
 
 const navBar = () => {
+  const linkClass = ({ isActive }) => {
+    return isActive
+      ? "text-red-500 bg-slate-900 px-5 py-2 rounded font-bold font-semibold"
+      : "px-5 py-2";
+  };
+
   return (
     <div className="shadow-lg">
       <header className=" container m-auto ">
-        <div className="  flex justify-around items-center h-28 ">
-          <h1 className="text-5xl font-extrabold inline-block">Bishal Store</h1>
+        <div className="  flex justify-between items-center h-28 w-35%  ">
+          <div className="text-5xl font-bold">Bishal</div>
 
-          <nav className="flex gap-8 container m-auto justify-center">
+          <nav className="flex gap-8 container m-auto justify-center w-40%">
             {navMenu.map((menu) => {
               return (
-                <Link to={menu.route} key={menu.label}>
+                <NavLink
+                  NavLink
+                  to={menu.route}
+                  key={menu.label}
+                  className={linkClass}
+                >
                   {menu.label}
-                </Link>
+                </NavLink>
               );
             })}
           </nav>
@@ -22,7 +33,7 @@ const navBar = () => {
             name="search"
             id="searchinput"
             placeholder="search what you want"
-            className="border-solid border-2 border-black p-2 rounded-lg flex-grow-1"
+            className="border-solid border-2 border-black p-2 rounded-lg"
           />
         </div>
       </header>
