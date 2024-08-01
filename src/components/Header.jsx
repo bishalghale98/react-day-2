@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import navMenu from "../constants/navMenu";
 
 const navBar = () => {
@@ -14,9 +15,9 @@ const navBar = () => {
           <nav className="flex gap-8 container m-auto justify-center">
             {navMenu.map((menu) => {
               return (
-                <a href={menu.route} key={menu.label}>
+                <Link to={menu.route} key={menu.label}>
                   {menu.label}
-                </a>
+                </Link>
               );
             })}
           </nav>
