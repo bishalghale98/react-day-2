@@ -4,13 +4,9 @@ import navMenu from "../constants/navMenu";
 const navBar = () => {
   return (
     <div className="shadow-lg">
-      <header className=" container m-auto">
-        <div className="  flex justify-between items-center  ">
-          <img
-            src="./src/assets/logo-bishal.png"
-            alt="logo"
-            className="w-1/3 h-24"
-          />
+      <header className=" container m-auto ">
+        <div className="  flex justify-around items-center h-28 ">
+          <h1 className="text-5xl font-extrabold inline-block">Bishal Store</h1>
 
           <nav className="flex gap-8 container m-auto justify-center">
             {navMenu.map((menu) => {

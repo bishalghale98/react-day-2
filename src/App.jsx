@@ -9,11 +9,12 @@ import About from "./pages/About";
 import Gallery from "./pages/Gallery";
 import Product from "./pages/Product";
 import Contact from "./pages/Contact";
+import MainLayout from "./layouts/MainLayout";
 
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/">
+      <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="Gallery" element={<Gallery />} />
