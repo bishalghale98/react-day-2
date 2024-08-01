@@ -1,6 +1,6 @@
 const card = (props) => {
   return (
-    <div className="border-solid border-2 border-sky-500 container m-auto  rounded-md text-center size-full ">
+    <div className="border-solid border-2 border-sky-500 container m-auto  rounded-md text-center  ">
       <div className="flex justify-center">
         <img
           src={props.img}

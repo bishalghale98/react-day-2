@@ -12,6 +12,8 @@ import MainLayout from "./layouts/MainLayout";
 import ProductsLists from "./pages/products/Lists";
 import ProductDetails from "./pages/products/Details";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -24,6 +26,10 @@ const App = () => {
         <Route path="products">
           <Route index element={<ProductsLists />} />
           <Route path=":id" element={<ProductDetails />} />
+        </Route>
+        <Route path="Auth">
+          <Route path="Login" element={<Login />} />
+          <Route path="Register" element={<Register />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>

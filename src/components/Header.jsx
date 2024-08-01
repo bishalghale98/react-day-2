@@ -9,7 +9,7 @@ const navBar = () => {
   };
 
   return (
-    <div className="shadow-lg">
+    <div className="shadow-lg mb-12">
       <header className=" container m-auto ">
         <div className="  flex justify-between items-center h-28 w-35%  ">
           <div className="text-5xl font-bold">Bishal</div>
