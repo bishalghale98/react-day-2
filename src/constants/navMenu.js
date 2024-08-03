@@ -23,6 +23,16 @@ const navMenu = [
     label: "Gallery",
     route: "/Gallery",
   },
+
+  {
+    label: "Login",
+    route: "/auth/login",
+  },
+
+  {
+    label: "Register",
+    route: "/auth/register",
+  },
 ];
 
 export default navMenu;

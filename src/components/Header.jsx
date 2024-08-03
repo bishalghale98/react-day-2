@@ -33,7 +33,7 @@ const navBar = () => {
             name="search"
             id="searchinput"
             placeholder="search what you want"
-            className="border-solid border-2 border-black p-2 rounded-lg"
+            className="border py-2 px-3 rounded"
           />
         </div>
       </header>
