@@ -11,7 +11,9 @@ const card = (props) => {
       <div>
         <h1 className="text-2xl">{props.title}</h1>
         <p className="text-lg">{props.description}</p>
-        <p className="font-mono">${props.price}</p>
+        <p className="font-mono bg-slate-600 text-yellow-500 container m-auto px-4 py-2 rounded-lg w-fit">
+          ${props.price}
+        </p>
         <button className="px-5 py-2 bg-slate-800 text-white rounded-md">
           ADD TO CART
         </button>
