@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import navMenu from "../constants/navMenu";
 
 const navBar = () => {
+  const isAuth = false;
   const linkClass = ({ isActive }) => {
     return isActive
       ? "text-red-500 bg-slate-900 px-5 py-2 rounded font-bold font-semibold"
@@ -15,18 +16,20 @@ const navBar = () => {
           <div className="text-5xl font-bold">Bishal</div>
 
           <nav className="flex gap-8 container m-auto justify-center w-40%">
-            {navMenu.map((menu) => {
-              return (
-                <NavLink
-                  NavLink
-                  to={menu.route}
-                  key={menu.label}
-                  className={linkClass}
-                >
-                  {menu.label}
-                </NavLink>
-              );
-            })}
+            {navMenu
+              .filter((menu) => menu.auth === isAuth)
+              .map((menu) => {
+                return (
+                  <NavLink
+                    NavLink
+                    to={menu.route}
+                    key={menu.label}
+                    className={linkClass}
+                  >
+                    {menu.label}
+                  </NavLink>
+                );
+              })}
           </nav>
           <input
             type="search"

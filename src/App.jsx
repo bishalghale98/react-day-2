@@ -27,11 +27,11 @@ const App = () => {
           <Route index element={<ProductsLists />} />
           <Route path=":id" element={<ProductDetails />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
         <Route path="Auth">
           <Route path="Login" element={<Login />} />
           <Route path="Register" element={<Register />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
       </Route>
     )
   );
