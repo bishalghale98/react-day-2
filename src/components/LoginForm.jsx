@@ -8,7 +8,9 @@ const LoginForm = () => {
   const { errors } = formState;
 
   async function submitForm(data) {
-    await login(data);
+    const response = await login(data);
+
+    console.log(response.data);
   }
 
   return (
