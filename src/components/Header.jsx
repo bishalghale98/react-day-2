@@ -2,7 +2,8 @@ import { NavLink } from "react-router-dom";
 import navMenu from "../constants/navMenu";
 
 const navBar = () => {
-  const isAuth = true;
+  const authToken = localStorage.getItem("authToken");
+  const isAuth = authToken ? true : false;
   const linkClass = ({ isActive }) => {
     return isActive
       ? "text-red-500 bg-slate-900 px-5 py-2 rounded font-bold font-semibold"

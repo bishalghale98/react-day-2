@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { EMAIL_REGEX, PASSWORD_REGEX } from "../constants/regex";
+import { signUp } from "../api/auth";
 
 const RegisterForm = () => {
   const { register, handleSubmit, formState, watch } = useForm({ mode: "all" });
@@ -8,8 +9,14 @@ const RegisterForm = () => {
 
   const { errors } = formState;
 
-  function submitForm(data) {
-    console.log(data);
+  async function submitForm(data) {
+    try {
+      const response = await signUp(data);
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

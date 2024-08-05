@@ -11,4 +11,17 @@ const login = async ({ email, password }) => {
   return response;
 };
 
-export { login };
+async function signUp(name, email, password, confirmPassword) {
+  const response = await axios.post(
+    "https://nodejs-20240519.vercel.app/api/auth/Register",
+    {
+      name,
+      email,
+      password,
+      confirmPassword,
+    }
+  );
+  return response;
+}
+
+export { login, signUp };

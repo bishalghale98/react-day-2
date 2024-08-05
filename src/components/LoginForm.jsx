@@ -8,9 +8,19 @@ const LoginForm = () => {
   const { errors } = formState;
 
   async function submitForm(data) {
-    const response = await login(data);
+    try {
+      const response = await login(data);
 
-    console.log(response.data);
+      const token = response.data.token;
+
+      // localStorage.setItem(name, kaslai rakhne)
+
+      localStorage.setItem("authToken", token);
+
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
