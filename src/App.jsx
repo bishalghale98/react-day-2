@@ -14,6 +14,7 @@ import ProductDetails from "./pages/products/Details";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const router = createBrowserRouter(

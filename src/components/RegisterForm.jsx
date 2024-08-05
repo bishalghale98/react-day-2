@@ -88,7 +88,7 @@ const RegisterForm = () => {
           type="password"
           className="border w-full mt-2 px-3 py-2 rounded"
           {...register("confirmPassword", {
-            required: "Comfirm Password is required",
+            required: "confirmPassword is required",
             validate: (value) => {
               return value == password || "Passwords do not match.";
             },

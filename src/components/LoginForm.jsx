@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { EMAIL_REGEX, PASSWORD_REGEX } from "../constants/regex";
 import { login } from "../api/auth";
+import { toast, ToastContainer } from "react-toastify";
 
 const LoginForm = () => {
   const { register, handleSubmit, formState } = useForm({ mode: "all" });
@@ -19,7 +20,7 @@ const LoginForm = () => {
 
       console.log(response.data);
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data);
     }
   }
 
@@ -83,6 +84,7 @@ const LoginForm = () => {
           Do not have an account? <a href="/auth/Register">Create Account</a>
         </span>
       </div>
+      <ToastContainer />
     </form>
   );
 };
