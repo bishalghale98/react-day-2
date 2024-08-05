@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { EMAIL_REGEX, PASSWORD_REGEX } from "../constants/regex";
 import { signUp } from "../api/auth";
+import { toast, ToastContainer } from "react-toastify";
 
 const RegisterForm = () => {
   const { register, handleSubmit, formState, watch } = useForm({ mode: "all" });
@@ -11,11 +12,11 @@ const RegisterForm = () => {
 
   async function submitForm(data) {
     try {
-      const response = await signUp(data);
+      await signUp(data);
 
-      console.log(response);
+      toast.success("user successfully registered");
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data);
     }
   }
 
@@ -111,6 +112,7 @@ const RegisterForm = () => {
           Already have an account? <a href="/auth/Login">Sign in</a>
         </span>
       </div>
+      <ToastContainer />
     </form>
   );
 };
