@@ -3,8 +3,8 @@ import Card from "./../../components/Card";
 const ProductsLists = () => {
   return (
     <div className="container m-auto">
-      <h1>Product List</h1>
-      <div className=" grid grid-cols-4">
+      <h1 className="text-6xl font-semibold ">Product List</h1>
+      <div className=" grid grid-cols-4 ">
         <Card
           title="realme 13 Pro 5G (Emerald Green, 512 GB)  (12 GB RAM)"
           description="Meet the Sony LYT-600, a 50MP powerhouse camera that’s a game-changer in smartphone photography."
