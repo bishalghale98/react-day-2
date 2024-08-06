@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import { EMAIL_REGEX, PASSWORD_REGEX } from "../constants/regex";
 import { signUp } from "../api/auth";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 const RegisterForm = () => {
   const { register, handleSubmit, formState, watch } = useForm({ mode: "all" });
