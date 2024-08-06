@@ -3,8 +3,11 @@ import { EMAIL_REGEX, PASSWORD_REGEX } from "../constants/regex";
 import { signUp } from "../api/auth";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
+import { useState } from "react";
+import Spinner from "./Spinner";
 
 const RegisterForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState, watch } = useForm({ mode: "all" });
 
   const password = watch("password");
@@ -12,12 +15,15 @@ const RegisterForm = () => {
   const { errors } = formState;
 
   async function submitForm(data) {
+    setIsLoading(true);
     try {
       await signUp(data);
 
       toast.success("user successfully registered");
     } catch (error) {
       toast.error(error.response.data);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -103,9 +109,9 @@ const RegisterForm = () => {
       <div>
         <button
           type="submit"
-          className="mt-5 bg-pink-500 text-white w-full py-2 hover:bg-pink-600"
+          className="mt-5 bg-pink-500 text-white w-full py-2 hover:bg-pink-600 flex justify-center items-center gap-1"
         >
-          Register
+          Register {isLoading ? <Spinner /> : null}
         </button>
       </div>
       <div className="text-center mt-5 text-sm text-gray-600">

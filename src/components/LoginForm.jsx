@@ -2,25 +2,37 @@ import { useForm } from "react-hook-form";
 import { EMAIL_REGEX, PASSWORD_REGEX } from "../constants/regex";
 import { login } from "../api/auth";
 import { toast, ToastContainer } from "react-toastify";
+import Spinner from "./Spinner";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState } = useForm({ mode: "all" });
 
   const { errors } = formState;
 
+  // after login throw to home page
+  const navigate = useNavigate();
+
+  // form submission process
   async function submitForm(data) {
+    setIsLoading(true);
     try {
       const response = await login(data);
 
-      const token = response.data.token;
-
       // localStorage.setItem(name, kaslai rakhne)
 
-      localStorage.setItem("authToken", token);
+      localStorage.setItem("authToken", response.data.token);
+
+      // after login throw to homw page
+      navigate("/");
 
       console.log(response.data);
     } catch (error) {
       toast.error(error.response.data);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -74,9 +86,9 @@ const LoginForm = () => {
       <div>
         <button
           type="submit"
-          className="mt-5 bg-blue-500 text-white w-full py-2 hover:bg-blue-600"
+          className="mt-5 bg-blue-500 text-white w-full py-2 hover:bg-blue-600 flex justify-center items-center gap-1"
         >
-          Login
+          Login {isLoading ? <Spinner /> : null}
         </button>
       </div>
       <div className="text-center text-sm mt-5 text-gray-600">
