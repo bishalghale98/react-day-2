@@ -3,7 +3,7 @@ import {
   decreaseCounter,
   increaseCounter,
   resetCounter,
-} from "../redux/counter.js/counterSlice";
+} from "../redux/counter/counterSlice";
 
 const About = () => {
   const { count } = useSelector((state) => state.counter);

@@ -28,4 +28,4 @@ const authSlice = createSlice({
 
 // state ma aayenw
 
-export default authSlice.reducers;
+export default authSlice.reducer;
