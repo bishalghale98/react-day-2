@@ -5,6 +5,8 @@ import { toast, ToastContainer } from "react-toastify";
 import Spinner from "./Spinner";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../redux/auth/authActions";
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,25 +17,11 @@ const LoginForm = () => {
   // after login throw to home page
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
   // form submission process
   async function submitForm(data) {
-    setIsLoading(true);
-    try {
-      const response = await login(data);
-
-      // localStorage.setItem(name, kaslai rakhne)
-
-      localStorage.setItem("authToken", response.data.token);
-
-      // after login throw to homw page
-      navigate("/");
-
-      console.log(response.data);
-    } catch (error) {
-      toast.error(error.response.data);
-    } finally {
-      setIsLoading(false);
-    }
+    dispatch(loginUser(data));
   }
 
   return (
