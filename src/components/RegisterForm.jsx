@@ -1,31 +1,35 @@
 import { useForm } from "react-hook-form";
 import { EMAIL_REGEX, PASSWORD_REGEX } from "../constants/regex";
-import { signUp } from "../api/auth";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
-import { useState } from "react";
+import { useEffect } from "react";
 import Spinner from "./Spinner";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../redux/auth/authActions";
 
 const RegisterForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState, watch } = useForm({ mode: "all" });
 
   const password = watch("password");
 
   const { errors } = formState;
 
-  async function submitForm(data) {
-    setIsLoading(true);
-    try {
-      await signUp(data);
+  const dispatch = useDispatch();
 
-      toast.success("user successfully registered");
-    } catch (error) {
-      toast.error(error.response.data);
-    } finally {
-      setIsLoading(false);
-    }
+  const { loading, error, user } = useSelector((state) => state.auth);
+
+  function submitForm(data) {
+    dispatch(registerUser(data));
   }
+
+  useEffect(() => {
+    if (user) {
+      toast.success("User registered successfully", { autoClose: 2000 });
+    }
+    if (error) {
+      toast.error(error, { autoClose: 2000 });
+    }
+  }, [error, user]);
 
   return (
     <form
@@ -111,7 +115,7 @@ const RegisterForm = () => {
           type="submit"
           className="mt-5 bg-pink-500 text-white w-full py-2 hover:bg-pink-600 flex justify-center items-center gap-1"
         >
-          Register {isLoading ? <Spinner /> : null}
+          Register {loading ? <Spinner /> : null}
         </button>
       </div>
       <div className="text-center mt-5 text-sm text-gray-600">

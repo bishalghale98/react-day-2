@@ -1,28 +1,39 @@
 import { useForm } from "react-hook-form";
 import { EMAIL_REGEX, PASSWORD_REGEX } from "../constants/regex";
-import { login } from "../api/auth";
 import { toast, ToastContainer } from "react-toastify";
 import Spinner from "./Spinner";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/auth/authActions";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const LoginForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState } = useForm({ mode: "all" });
 
   const { errors } = formState;
 
   // after login throw to home page
-  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
+  const { loading, error, user } = useSelector((state) => state.auth);
+
+  const navigate = useNavigate();
+
   // form submission process
-  async function submitForm(data) {
+  function submitForm(data) {
     dispatch(loginUser(data));
   }
+
+  useEffect(() => {
+    if (user != null) {
+      navigate("/");
+    }
+
+    if (error) {
+      toast.error(error, { autoClose: 2000 });
+    }
+  }, [error, user, navigate]);
 
   return (
     <form
@@ -76,12 +87,13 @@ const LoginForm = () => {
           type="submit"
           className="mt-5 bg-blue-500 text-white w-full py-2 hover:bg-blue-600 flex justify-center items-center gap-1"
         >
-          Login {isLoading ? <Spinner /> : null}
+          Login {loading ? <Spinner /> : null}
         </button>
       </div>
       <div className="text-center text-sm mt-5 text-gray-600">
         <span>
-          Do not have an account? <a href="/auth/Register">Create Account</a>
+          Do not have an account?{" "}
+          <Link to="/auth/Register">Create Account</Link>
         </span>
       </div>
       <ToastContainer />

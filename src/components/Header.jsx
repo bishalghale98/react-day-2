@@ -1,9 +1,11 @@
 import { NavLink } from "react-router-dom";
 import navMenu from "../constants/navMenu";
+import { useSelector } from "react-redux";
 
 const navBar = () => {
-  const authToken = localStorage.getItem("authToken");
-  const isAuth = authToken ? true : false;
+  const { user } = useSelector((state) => state.auth);
+  const isAuth = user ? true : false;
+
   const linkClass = ({ isActive }) => {
     return isActive
       ? "text-red-500 bg-slate-900 px-5 py-2 rounded font-bold font-semibold"
