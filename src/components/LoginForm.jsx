@@ -4,7 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import Spinner from "./Spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/auth/authActions";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
 const LoginForm = () => {
@@ -18,22 +18,16 @@ const LoginForm = () => {
 
   const { loading, error, user } = useSelector((state) => state.auth);
 
-  const navigate = useNavigate();
-
   // form submission process
   function submitForm(data) {
     dispatch(loginUser(data));
   }
 
   useEffect(() => {
-    if (user != null) {
-      navigate("/");
-    }
-
     if (error) {
       toast.error(error, { autoClose: 2000 });
     }
-  }, [error, user, navigate]);
+  }, [error, user]);
 
   return (
     <form
