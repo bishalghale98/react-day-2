@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getList } from "../../api/product";
+import { getById, getList } from "../../api/product";
 
 const getProductList = createAsyncThunk(
   "product/list",
@@ -14,6 +14,19 @@ const getProductList = createAsyncThunk(
   }
 );
 
+const getProductById = createAsyncThunk(
+  "product/id",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await getById(id);
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data);
+    }
+  }
+);
+
 getList;
 
-export { getProductList };
+export { getProductList, getProductById };

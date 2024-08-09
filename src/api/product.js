@@ -7,4 +7,10 @@ const getList = async () => {
   return response;
 };
 
-export { getList };
+const getById = async (id) => {
+  const response = await axios.get(`${config.apiurl}/api/products/${id}`, {});
+
+  return response;
+};
+
+export { getList, getById };

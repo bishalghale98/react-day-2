@@ -30,15 +30,9 @@ const ProductsLists = () => {
   return (
     <div className="container m-auto">
       <h1 className="text-6xl font-semibold ">Product List</h1>
-      <div className=" container mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 items-center">
+      <div className=" container mx-auto grid items-center justify-center grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4  ">
         {products.map((product) => (
-          <Card
-            key={product.id}
-            title={product.name}
-            brand={product.brand}
-            price={product.price}
-            category={product.category}
-          />
+          <Card key={product.id} {...product} />
         ))}
       </div>
       <ToastContainer />

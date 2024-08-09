@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const Spinner = ({ size = 20 }) => {
   return (
     <div>

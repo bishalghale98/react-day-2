@@ -1,19 +1,24 @@
-const card = (props) => {
+import { Link } from "react-router-dom";
+
+const card = ({ id, name, category, price, brand = "Default brand" }) => {
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-10 ">
-      <a>
+      <h4 className="text-center text-white font-semibold pt-3 pb-1 ">
+        {category}
+      </h4>
+      <Link to={`${id}`}>
         <img
           className="p-4 rounded-3xl h-96 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 "
           src="https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp"
           alt="product image"
         />
-      </a>
+      </Link>
       <div className="px-3 py-1 text-center text-black font-semibold text-xl bg-lime-400 w-max mx-auto rounded-md">
-        <h3>{props.brand}</h3>
+        <h3>{brand}</h3>
       </div>
       <div className="px-5 pb-5">
         <h5 className="text-xl font-semibold text-gray-900 dark:text-white">
-          {props.title}
+          {name}
         </h5>
         <div className="flex items-center mt-2.5 mb-5">
           <div className="flex items-center space-x-1 rtl:space-x-reverse">
@@ -69,14 +74,14 @@ const card = (props) => {
         </div>
         <div className="flex items-center justify-between">
           <span className="text-3xl font-bold text-gray-900 dark:text-white">
-            ${props.price}
+            ${price}
           </span>
-          <a
-            href="#"
+          <Link
+            to={`${id}`}
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
-            Add to cart
-          </a>
+            Shop Now
+          </Link>
         </div>
       </div>
     </div>
