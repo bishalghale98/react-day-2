@@ -19,7 +19,7 @@ const ProductDetails = () => {
   if (loading)
     return (
       <div className="flex items-center justify-center w-full h-[80vh]">
-        <Spinner size={64} />
+        <Spinner height="h-20" width="w-20" />
       </div>
     );
 

@@ -23,14 +23,14 @@ const ProductsLists = () => {
   if (loading)
     return (
       <div className="flex items-center justify-center w-full h-[80vh]">
-        <Spinner size={64} />
+        <Spinner height="h-20" width="w-20" />
       </div>
     );
 
   return (
     <div className="container m-auto">
       <h1 className="text-6xl font-semibold ">Product List</h1>
-      <div className=" container mx-auto grid items-center justify-center grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4  ">
+      <div className=" container mx-auto py-10 grid items-center justify-center grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4  ">
         {products.map((product) => (
           <Card key={product.id} {...product} />
         ))}

@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-const Spinner = ({ size = 20 }) => {
+const Spinner = ({ width = "w-6", height = "h-6" }) => {
   return (
     <div>
       <div role="status">
         <svg
           aria-hidden="true"
-          className={`w-[${size}px] h-[${size}px] text-black animate-spin dark:text-white fill-blue-600`}
+          className={`${width} ${height}  text-black animate-spin dark:text-white fill-blue-600`}
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
