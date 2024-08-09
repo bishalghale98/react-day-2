@@ -3,11 +3,14 @@ const card = (props) => {
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-10 ">
       <a href="#">
         <img
-          className="p-8 rounded-t-lg h-96"
-          src={props.img}
+          className="p-4 rounded-t-lg h-96"
+          src="https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp"
           alt="product image"
         />
       </a>
+      <div className="px-3 py-1 text-center text-black font-semibold text-xl bg-lime-400 w-max mx-auto rounded-md">
+        <h3>{props.brand}</h3>
+      </div>
       <div className="px-5 pb-5">
         <h5 className="text-xl font-semibold text-gray-900 dark:text-white">
           {props.title}

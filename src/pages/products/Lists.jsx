@@ -1,17 +1,42 @@
+import { useDispatch, useSelector } from "react-redux";
 import Card from "./../../components/Card";
+import { useEffect } from "react";
+import { getProductList } from "../../redux/product/productActions";
+import { toast, ToastContainer } from "react-toastify";
 
 const ProductsLists = () => {
+  const { loading, error, products } = useSelector((state) => state.product);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProductList());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error, { autoClose: 2000 });
+    }
+  }, [error]);
+
+  if (products) {
+  }
+
   return (
     <div className="container m-auto">
       <h1 className="text-6xl font-semibold ">Product List</h1>
-      <div className=" grid grid-cols-4 ">
-        <Card
-          title="realme 13 Pro 5G (Emerald Green, 512 GB)  (12 GB RAM)"
-          description="Meet the Sony LYT-600, a 50MP powerhouse camera that’s a game-changer in smartphone photography."
-          price="587"
-          img="https://rukminim2.flixcart.com/image/850/1000/xif0q/mobile/q/d/x/-original-imah38dbgt2t8jez.jpeg?q=90&crop=false"
-        />
+      <div className=" grid grid-cols-4 gap-5">
+        {products.map((product) => (
+          <Card
+            key={product.id}
+            title={product.name}
+            brand={product.brand}
+            price={product.price}
+            category={product.category}
+          />
+        ))}
       </div>
+      <ToastContainer />
     </div>
   );
 };
