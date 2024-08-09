@@ -1,9 +1,9 @@
 const card = (props) => {
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-10 ">
-      <a href="#">
+      <a>
         <img
-          className="p-4 rounded-t-lg h-96"
+          className="p-4 rounded-3xl h-96 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 "
           src="https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp"
           alt="product image"
         />
