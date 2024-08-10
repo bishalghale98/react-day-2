@@ -8,6 +8,7 @@ import {
 import { toast, ToastContainer } from "react-toastify";
 import Spinner from "./../../components/Spinner";
 import ProductsFilter from "../../components/ProductsFilter";
+import { Link } from "react-router-dom";
 
 const ProductsLists = () => {
   const { loading, error, products, query } = useSelector(
@@ -30,6 +31,13 @@ const ProductsLists = () => {
   return (
     <div className="container m-auto">
       <h1 className="text-6xl font-semibold ">Product List</h1>
+      <div className="flex flex-row-reverse">
+        <Link>
+          <button className="px-5 py-2 bg-blue-600 rounded-md text-white font-semibold">
+            Add Product +
+          </button>
+        </Link>
+      </div>
       <ProductsFilter />
       {loading ? (
         <div className="flex items-center justify-center w-full h-[80vh]">

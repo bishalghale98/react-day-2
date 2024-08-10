@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFilters, setLimit, setSort } from "../redux/product/productSlice";
 
 const ProductsFilter = () => {
-  const { query } = useSelector((state) => state.product);
+  const { query, categories } = useSelector((state) => state.product);
 
   const dispatch = useDispatch();
 
@@ -41,13 +41,20 @@ const ProductsFilter = () => {
           <label htmlFor="category" className="mb-1">
             Category
           </label>
-          <input
-            type="text"
-            id="category"
-            className="border p-2 rounded"
-            value={query?.filters?.category}
+          <select
+            name="sort"
+            id="sort"
+            className="border size-fit p-2 rounded"
+            value={JSON.stringify(query?.category)}
             onChange={(e) => filterProductByCategory(e.target.value)}
-          />
+          >
+            <option value="">Select Categroy</option>
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="flex flex-col">
           <label htmlFor="sort" className="mb-1">
@@ -56,7 +63,7 @@ const ProductsFilter = () => {
           <select
             name="sort"
             id="sort"
-            className="border p-2 rounded"
+            className="border size-fit p-2 rounded"
             value={JSON.stringify(query?.sort)}
             onChange={(e) => sortProducts(e.target.value)}
           >
@@ -76,7 +83,7 @@ const ProductsFilter = () => {
           <select
             name="limit"
             id="Limit"
-            className="border p-2 rounded"
+            className="border size-fit md:size-fit p-2 rounded"
             value={query?.limit ?? 10}
             onChange={(e) => setProductsLimit(e.target.value)}
           >
