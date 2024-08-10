@@ -30,4 +30,15 @@ const getCategories = async () => {
   return response;
 };
 
-export { getList, getById, getCategories };
+const addProduct = async ({ name, category, brand, price }) => {
+  const response = await axios.post(`${config.apiurl}/api/products`, {
+    name,
+    category,
+    brand,
+    price,
+  });
+
+  return response;
+};
+
+export { getList, getById, getCategories, addProduct };

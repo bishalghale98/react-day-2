@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import Card from "./../../components/Card";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   getProductByCategories,
   getProductList,
@@ -8,7 +8,8 @@ import {
 import { toast, ToastContainer } from "react-toastify";
 import Spinner from "./../../components/Spinner";
 import ProductsFilter from "../../components/ProductsFilter";
-import { Link } from "react-router-dom";
+import Modal from "../../components/Modal";
+import AddProductForm from "../../components/AddProductForm";
 
 const ProductsLists = () => {
   const { loading, error, products, query } = useSelector(
@@ -16,6 +17,8 @@ const ProductsLists = () => {
   );
 
   const dispatch = useDispatch();
+
+  const [openAddModal, setAddModal] = useState(true);
 
   useEffect(() => {
     dispatch(getProductList(query));
@@ -32,11 +35,12 @@ const ProductsLists = () => {
     <div className="container m-auto">
       <h1 className="text-6xl font-semibold ">Product List</h1>
       <div className="flex flex-row-reverse">
-        <Link>
-          <button className="px-5 py-2 bg-blue-600 rounded-md text-white font-semibold">
-            Add Product +
-          </button>
-        </Link>
+        <button
+          className="px-5 py-2 bg-blue-600 rounded-md text-white font-semibold"
+          onClick={() => setAddModal(true)}
+        >
+          Add Product +
+        </button>
       </div>
       <ProductsFilter />
       {loading ? (
@@ -50,7 +54,17 @@ const ProductsLists = () => {
           ))}
         </div>
       )}
+
+      {/* toast message */}
       <ToastContainer />
+
+      {/* modal */}
+      <Modal
+        isOpen={openAddModal}
+        setIsOpen={setAddModal}
+        title="Add Product"
+        content={<AddProductForm />}
+      />
     </div>
   );
 };
