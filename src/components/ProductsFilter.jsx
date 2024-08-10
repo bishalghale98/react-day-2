@@ -50,7 +50,7 @@ const ProductsFilter = () => {
           >
             <option value="">Select Categroy</option>
             {categories.map((category) => (
-              <option key={category} value={category}>
+              <option key={category} value={category} className="capitalize">
                 {category}
               </option>
             ))}
@@ -67,6 +67,7 @@ const ProductsFilter = () => {
             value={JSON.stringify(query?.sort)}
             onChange={(e) => sortProducts(e.target.value)}
           >
+            <option value="">Select Sort Type</option>
             <option value={JSON.stringify({ createdAt: -1 })}>Latest</option>
             <option value={JSON.stringify({ price: 1 })}>
               Price: Low to High
@@ -75,6 +76,10 @@ const ProductsFilter = () => {
               Price: High to Low
             </option>
           </select>
+
+          {/* start test */}
+
+          {/* end here */}
         </div>
         <div className="flex flex-col">
           <label htmlFor="limit" className="mb-1">

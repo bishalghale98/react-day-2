@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/auth/authActions";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { login } from "../api/auth";
 
 const LoginForm = () => {
   const { register, handleSubmit, formState } = useForm({ mode: "all" });
@@ -19,8 +20,17 @@ const LoginForm = () => {
   const { loading, error, user } = useSelector((state) => state.auth);
 
   // form submission process
-  function submitForm(data) {
+  async function submitForm(data) {
     dispatch(loginUser(data));
+    try {
+      const response = await login(data);
+
+      const authToken = response.data.token;
+
+      localStorage.setItem("authToken", authToken);
+    } catch (error) {
+      toast.error(error, { autoClose: 2000 });
+    }
   }
 
   useEffect(() => {

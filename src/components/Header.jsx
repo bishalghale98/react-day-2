@@ -22,6 +22,8 @@ const navBar = () => {
 
   function logout() {
     dispatch(logoutUser());
+
+    localStorage.removeItem("authToken");
   }
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

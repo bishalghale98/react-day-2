@@ -12,24 +12,32 @@ import Modal from "../../components/Modal";
 import AddProductForm from "../../components/AddProductForm";
 
 const ProductsLists = () => {
-  const { loading, error, products, query } = useSelector(
-    (state) => state.product
-  );
+  const {
+    loading,
+    error,
+    products,
+    query,
+    add: { success },
+  } = useSelector((state) => state.product);
 
   const dispatch = useDispatch();
 
-  const [openAddModal, setAddModal] = useState(true);
+  const [openAddModal, setAddModal] = useState(false);
 
   useEffect(() => {
     dispatch(getProductList(query));
     dispatch(getProductByCategories());
-  }, [dispatch, query]);
+  }, [dispatch, query, success]);
 
   useEffect(() => {
-    if (error) {
-      toast.error(error, { autoClose: 2000 });
+    if (success) {
+      setAddModal(false);
+      toast.success("Product added successfully!", { autoClose: 1000 });
     }
-  }, [error]);
+    if (error) {
+      toast.error(error, { autoClose: 1000 });
+    }
+  }, [error, success]);
 
   return (
     <div className="container m-auto">

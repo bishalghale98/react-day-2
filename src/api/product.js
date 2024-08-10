@@ -1,5 +1,6 @@
 import axios from "axios";
 import config from "../config/config";
+import api from "./api";
 
 const getList = async ({
   filters = {},
@@ -31,7 +32,7 @@ const getCategories = async () => {
 };
 
 const addProduct = async ({ name, category, brand, price }) => {
-  const response = await axios.post(`${config.apiurl}/api/products`, {
+  const response = await api.post(`/products`, {
     name,
     category,
     brand,

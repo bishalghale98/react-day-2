@@ -12,8 +12,15 @@ const productSlice = createSlice({
     products: [],
     categories: [],
     loading: false,
-    error: null,
+    error: {},
     query: null,
+    add: {
+      loading: false,
+      error: null,
+      success: false,
+    },
+    // default order by descending
+    // default sort by date
   },
   reducers: {
     setLimit: (state, action) => {
@@ -65,14 +72,15 @@ const productSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(addNewProduct.pending, (state) => {
-        state.loading = true;
         state.error = null;
+        state.add.loading = true;
       })
       .addCase(addNewProduct.fulfilled, (state) => {
-        state.loading = false;
+        state.add.loading = false;
+        state.add.success = true;
       })
       .addCase(addNewProduct.rejected, (state, action) => {
-        state.loading = false;
+        state.add.loading = false;
         state.error = action.payload;
       });
   },

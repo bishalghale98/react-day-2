@@ -1,11 +1,18 @@
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNewProduct } from "../redux/product/productActions";
+import Spinner from "./Spinner";
+import { useEffect } from "react";
 
 const AddProductForm = () => {
   const {
+    add: { loading, success },
+  } = useSelector((state) => state.product);
+
+  const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -14,6 +21,12 @@ const AddProductForm = () => {
   function submitForm(data) {
     dispatch(addNewProduct(data));
   }
+
+  useEffect(() => {
+    if (success) {
+      reset();
+    }
+  }, [reset, success]);
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
@@ -75,8 +88,9 @@ const AddProductForm = () => {
         />
         <p className="text-red-700 text-sm my-1">{errors.name?.message}</p>
       </div>
-      <button className="font-semibold bg-green-500 text-white px-5 py-2 w-full mt-5 rounded-lg">
-        Add Product +
+      <button className="font-semibold bg-green-500 text-white px-5 py-2 w-full mt-5 rounded-lg flex justify-center gap-2">
+        <span>Add Product</span>{" "}
+        {loading ? <Spinner height="h-6" width="6" /> : "+"}
       </button>
     </form>
   );
