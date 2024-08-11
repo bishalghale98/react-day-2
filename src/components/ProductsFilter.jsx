@@ -1,17 +1,27 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useDispatch, useSelector } from "react-redux";
 import { setFilters, setLimit, setSort } from "../redux/product/productSlice";
+import { useEffect, useState } from "react";
 
 const ProductsFilter = () => {
   const { query, categories } = useSelector((state) => state.product);
 
   const dispatch = useDispatch();
 
+  const [sort, setSortState] = useState(JSON.stringify({ createdAt: -1 }));
+
+  const sortProducts = (sortOption) => {
+    // Dispatch the sort action with the parsed sort option
+    dispatch(setSort(JSON.parse(sortOption)));
+  };
+
+  // Run sortProducts whenever the sort state changes
+  useEffect(() => {
+    sortProducts(sort);
+  }, [sort]);
+
   function setProductsLimit(limit) {
     dispatch(setLimit(parseInt(limit)));
-  }
-
-  function sortProducts(sort) {
-    dispatch(setSort(JSON.parse(sort)));
   }
 
   function filterProductByName(value) {
@@ -65,9 +75,8 @@ const ProductsFilter = () => {
             id="sort"
             className="border size-fit p-2 rounded"
             value={JSON.stringify(query?.sort)}
-            onChange={(e) => sortProducts(e.target.value)}
+            onChange={(e) => setSortState(e.target.value)}
           >
-            <option value="">Select Sort Type</option>
             <option value={JSON.stringify({ createdAt: -1 })}>Latest</option>
             <option value={JSON.stringify({ price: 1 })}>
               Price: Low to High

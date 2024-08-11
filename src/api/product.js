@@ -1,5 +1,3 @@
-import axios from "axios";
-import config from "../config/config";
 import api from "./api";
 
 const getList = async ({
@@ -11,22 +9,19 @@ const getList = async ({
     sort
   )}&filters=${JSON.stringify(filters)}`;
 
-  const response = await axios.get(`${config.apiurl}/api/products?${query}`);
+  const response = await api.get(`/products?${query}`);
 
   return response;
 };
 
 const getById = async (id) => {
-  const response = await axios.get(`${config.apiurl}/api/products/${id}`, {});
+  const response = await api.get(`/products/${id}`, {});
 
   return response;
 };
 
 const getCategories = async () => {
-  const response = await axios.get(
-    `${config.apiurl}/api/products/categories`,
-    {}
-  );
+  const response = await api.get(`/products/categories`, {});
 
   return response;
 };

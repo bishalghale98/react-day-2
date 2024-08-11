@@ -7,6 +7,10 @@ const loginUser = createAsyncThunk(
     try {
       const response = await login(data);
 
+      const authToken = response.data.token;
+
+      localStorage.setItem("authToken", authToken); // save user token to local storage
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data);
