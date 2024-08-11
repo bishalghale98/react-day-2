@@ -1,6 +1,16 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Link } from "react-router-dom";
+import { FaTrashAlt } from "react-icons/fa";
+import { deleteProductById } from "../redux/product/productActions";
+import { useDispatch } from "react-redux";
 
 const card = ({ id, name, category, price, brand = "Default brand" }) => {
+  const dispatch = useDispatch();
+
+  function deleteProduct() {
+    dispatch(deleteProductById(id));
+  }
+
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-10 ">
       <h4 className="text-center text-white font-semibold pt-3 pb-1 ">
@@ -82,6 +92,14 @@ const card = ({ id, name, category, price, brand = "Default brand" }) => {
           >
             Shop Now
           </Link>
+        </div>
+        <div className="flex justify-center ">
+          <button
+            className="bg-red-600 flex items-center gap-2  px-5 py-2 rounded-md text-white"
+            onClick={deleteProduct}
+          >
+            Delete <FaTrashAlt />
+          </button>
         </div>
       </div>
     </div>

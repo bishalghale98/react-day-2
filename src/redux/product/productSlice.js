@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addNewProduct,
+  deleteProductById,
   getProductByCategories,
   getProductById,
   getProductList,
@@ -17,6 +18,10 @@ const productSlice = createSlice({
     add: {
       loading: false,
       error: null,
+      success: false,
+    },
+    delete: {
+      loading: false,
       success: false,
     },
     // default order by descending
@@ -38,6 +43,8 @@ const productSlice = createSlice({
       .addCase(getProductList.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.add.success = false;
+        state.delete.success = false;
       })
       .addCase(getProductList.fulfilled, (state, action) => {
         state.products = action.payload;
@@ -81,6 +88,18 @@ const productSlice = createSlice({
       })
       .addCase(addNewProduct.rejected, (state, action) => {
         state.add.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteProductById.pending, (state) => {
+        state.delete.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteProductById.fulfilled, (state) => {
+        state.delete.loading = false;
+        state.delete.success = true;
+      })
+      .addCase(deleteProductById.rejected, (state, action) => {
+        state.delete.loading = false;
         state.error = action.payload;
       });
   },
