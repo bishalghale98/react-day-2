@@ -43,4 +43,22 @@ const deleteProduct = async (id) => {
   return response;
 };
 
-export { getList, getById, getCategories, addProduct, deleteProduct };
+const editProduct = async (id, { name, category, brand, price }) => {
+  const response = await api.put(`/products/${id}`, {
+    name,
+    category,
+    brand,
+    price,
+  });
+
+  return response;
+};
+
+export {
+  getList,
+  getById,
+  getCategories,
+  addProduct,
+  deleteProduct,
+  editProduct,
+};

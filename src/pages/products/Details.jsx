@@ -28,7 +28,7 @@ const ProductDetails = () => {
       <h1 className="container mx-auto pt-16 font-bold text-5xl">
         Products Details
       </h1>
-      <div className=" container mx-auto h-fit lg:h-[80vh] flex flex-col lg:flex-row justify-evenly items-center py-10 gap-4 ">
+      <div className=" container mx-auto h-fit lg:h-[90vh] flex flex-col lg:flex-row justify-evenly items-center py-10 gap-4 m-[-10em]">
         <div>
           <div className="flex gap-7">
             <p className="text-center text-white bg-orange-600 font-semibold w-max rounded py-2 px-5 mb-3">

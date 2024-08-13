@@ -18,6 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 import AuthLayout from "./layouts/AuthLayout";
 import UnAuthLayout from "./layouts/UnAuthLayout";
 import { useSelector } from "react-redux";
+import EditProduct from "./pages/products/Edit";
 
 const App = () => {
   const { user } = useSelector((state) => state.auth);
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="products">
             <Route index element={<ProductsLists />} />
             <Route path=":id" element={<ProductDetails />} />
+            <Route path="edit/:id" element={<EditProduct />} />
           </Route>
         </Route>
 

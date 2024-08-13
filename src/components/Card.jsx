@@ -1,14 +1,33 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Link } from "react-router-dom";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import { deleteProductById } from "../redux/product/productActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import Modal from "./Modal";
+import Spinner from "./Spinner";
+import { RxCross2 } from "react-icons/rx";
 
 const card = ({ id, name, category, price, brand = "Default brand" }) => {
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
+
   const dispatch = useDispatch();
 
+  const {
+    delete: { loading },
+  } = useSelector((state) => state.product);
+
   function deleteProduct() {
+    setShowDeletePopup(true);
+    // dispatch(deleteProductById(id));
+  }
+
+  function confirmDeleteProduct() {
     dispatch(deleteProductById(id));
+  }
+
+  function cancelDeleteProduct() {
+    setShowDeletePopup(false);
   }
 
   return (
@@ -93,15 +112,52 @@ const card = ({ id, name, category, price, brand = "Default brand" }) => {
             Shop Now
           </Link>
         </div>
-        <div className="flex justify-center ">
+        <div className="flex justify-around ">
           <button
             className="bg-red-600 flex items-center gap-2  px-5 py-2 rounded-md text-white"
             onClick={deleteProduct}
           >
             Delete <FaTrashAlt />
           </button>
+          <Link
+            to={`edit/${id}`}
+            className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2 rounded-md"
+          >
+            Edit <FaPencilAlt />
+          </Link>
         </div>
       </div>
+
+      <Modal
+        isOpen={showDeletePopup}
+        setIsOpen={setShowDeletePopup}
+        title={<div className="text-red-900 ">Delete Product</div>}
+        content={
+          <div className="text-left text-red-400">
+            Are you sure you want to delete this product?
+          </div>
+        }
+        actions={
+          <div className="flex justify-between gap-10">
+            <div>
+              <button
+                className="bg-red-600 px-5 py-2 rounded-md text-white flex items-center gap-2"
+                onClick={confirmDeleteProduct}
+              >
+                Yes {loading ? <Spinner /> : <FaTrashAlt />}
+              </button>
+            </div>
+            <div>
+              <button
+                className="bg-green-600 px-5 py-2 rounded-md text-white flex items-center gap-2"
+                onClick={cancelDeleteProduct}
+              >
+                No <RxCross2 />
+              </button>
+            </div>
+          </div>
+        }
+      />
     </div>
   );
 };

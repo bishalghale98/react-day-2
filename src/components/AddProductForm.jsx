@@ -1,32 +1,52 @@
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewProduct } from "../redux/product/productActions";
+import { addNewProduct, updateProduct } from "../redux/product/productActions";
 import Spinner from "./Spinner";
 import { useEffect } from "react";
+import { MdModeEdit } from "react-icons/md";
+import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-const AddProductForm = () => {
+// eslint-disable-next-line react/prop-types
+const AddProductForm = ({ product }) => {
   const {
-    add: { loading, success },
+    add: { loading: addPending, success: addSuccess },
+    edit: { loading: editPending, success: editSuccess },
   } = useSelector((state) => state.product);
+
+  const isLoading = addPending || editPending;
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: product });
 
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   function submitForm(data) {
-    dispatch(addNewProduct(data));
+    if (product) {
+      dispatch(updateProduct(data));
+    } else {
+      dispatch(addNewProduct(data));
+    }
   }
 
   useEffect(() => {
-    if (success) {
+    if (addSuccess) {
       reset();
     }
-  }, [reset, success]);
+    if (editSuccess) {
+      navigate("/products");
+      toast.success("Product updated successfully", {
+        autoClose: 1000,
+        onClose: () => {},
+      });
+    }
+  }, [reset, addSuccess, editSuccess, navigate]);
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
@@ -88,10 +108,23 @@ const AddProductForm = () => {
         />
         <p className="text-red-700 text-sm my-1">{errors.name?.message}</p>
       </div>
-      <button className="font-semibold bg-green-500 text-white px-5 py-2 w-full mt-5 rounded-lg flex justify-center gap-2">
-        <span>Add Product</span>{" "}
-        {loading ? <Spinner height="h-6" width="6" /> : "+"}
+      <button
+        className={`${
+          product
+            ? "bg-blue-500 hover:bg-blue-600"
+            : "bg-green-500 hover:bg-green-600"
+        } font-semibold text-white px-5 py-2 w-full mt-5 rounded-lg flex items-center justify-center item gap-2`}
+      >
+        <span>{product ? `Edit Product` : `Add Product`}</span>
+        {isLoading ? (
+          <Spinner height="h-6" width="6" />
+        ) : product ? (
+          <MdModeEdit />
+        ) : (
+          "+"
+        )}
       </button>
+      <ToastContainer />
     </form>
   );
 };

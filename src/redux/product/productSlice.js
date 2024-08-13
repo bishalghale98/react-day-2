@@ -5,6 +5,7 @@ import {
   getProductByCategories,
   getProductById,
   getProductList,
+  updateProduct,
 } from "./productActions";
 
 const productSlice = createSlice({
@@ -21,6 +22,10 @@ const productSlice = createSlice({
       success: false,
     },
     delete: {
+      loading: false,
+      success: false,
+    },
+    edit: {
       loading: false,
       success: false,
     },
@@ -45,6 +50,7 @@ const productSlice = createSlice({
         state.error = null;
         state.add.success = false;
         state.delete.success = false;
+        state.edit.success = false;
       })
       .addCase(getProductList.fulfilled, (state, action) => {
         state.products = action.payload;
@@ -100,6 +106,18 @@ const productSlice = createSlice({
       })
       .addCase(deleteProductById.rejected, (state, action) => {
         state.delete.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateProduct.pending, (state) => {
+        state.edit.loading = true;
+        state.error = null;
+      })
+      .addCase(updateProduct.fulfilled, (state) => {
+        state.edit.loading = false;
+        state.edit.success = true;
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
+        state.edit.loading = false;
         state.error = action.payload;
       });
   },
