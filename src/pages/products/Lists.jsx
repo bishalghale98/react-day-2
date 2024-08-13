@@ -31,7 +31,6 @@ const ProductsLists = () => {
   }, [dispatch, query, addSuccess, deleteSuccess]);
 
   useEffect(() => {
-    console.log("hello");
     if (addSuccess) {
       setAddModal(false);
       toast.success("Product added successfully!", { autoClose: 1000 });
