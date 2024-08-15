@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Link } from "react-router-dom";
-import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
+import { FaCartPlus, FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import { deleteProductById } from "../redux/product/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
@@ -112,16 +112,21 @@ const card = ({ id, name, category, price, brand = "Default brand" }) => {
             Shop Now
           </Link>
         </div>
-        <div className="flex justify-around ">
+        <div className="flex justify-around gap-2">
           <button
-            className="bg-red-600 flex items-center gap-2  px-5 py-2 rounded-md text-white"
+            className="bg-red-600 flex items-center gap-2  px-3 py-1 rounded-md text-white"
             onClick={deleteProduct}
           >
             Delete <FaTrashAlt />
           </button>
+
+          <button className="bg-green-300 flex items-center gap-2  px-3 py-1 rounded-md text-white">
+            Add to cart <FaCartPlus />
+          </button>
+
           <Link
             to={`edit/${id}`}
-            className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2 rounded-md"
+            className="flex items-center gap-2 bg-emerald-600 text-white px-3 py-1 rounded-md"
           >
             Edit <FaPencilAlt />
           </Link>
